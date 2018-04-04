@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: johnb-api
+
+server:
+  port: ${PORT:8081}
+
+eureka:
+  instance:
+    # intervalo de tempo que o eureka vai receber os heartbeats desse service.
+    leaseRenewalIntervalInSeconds: 5
+    # precisa ser maior que o tempo do anterior, pois este, define o intervalo de remoção do serviço
+    # do registro, após o último hearbeat enviado.
+    leaseExpirationDurationInSeconds: 10
+    # url de health check do serviço.
+    healthCheckUrlPath: http://localhost:${server.port}/health
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      
